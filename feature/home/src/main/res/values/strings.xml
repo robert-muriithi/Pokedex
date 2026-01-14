@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pok_dex">Pokédex</string>
+    <string name="failed_to_load_pok_mon">Failed to load Pokémon</string>
+    <string name="search_pok_mon_by_name_or_id">Search Pokémon by name or ID...</string>
+    <string name="search">Search</string>
+    <string name="clear">Clear</string>
+</resources>
