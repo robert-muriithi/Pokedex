@@ -6,6 +6,7 @@ A modern Android application built with Jetpack Compose that displays a list of 
 # Screenshots
 <img src="ss/Screenshot_20260114_143132.png" width="250"/> <img src="ss/Screenshot_20260114_143141.png" width="250"/>
 
+<video src="ss/Screen_recording_20260114_143149.mp4" width="320" height="640" controls autoplay loop muted></video>
 
 ## Features
 
