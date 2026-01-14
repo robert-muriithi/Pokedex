@@ -69,7 +69,7 @@ This ensures the core business logic remains independent and testable.
 ## Project Structure
 
 ```
-Pokemonapp/
+Pokedex/
 ├── app/                          # Application module
 │   ├── navigation/              # Navigation setup
 │   └── MainActivity.kt          # Entry point
@@ -229,7 +229,7 @@ The `PokemonRemoteMediator` implements an **offline-first strategy**:
 
 ### Prerequisites
 
-- **Android Studio**: Hedgehog (2023.1.1) or later
+- **Android Studio**: Otter | 2025.2.1 or later
 - **JDK**: Java 11 or later
 - **Minimum SDK**: API 24 (Android 7.0)
 - **Target SDK**: API 36 (Android 15)
@@ -239,8 +239,8 @@ The `PokemonRemoteMediator` implements an **offline-first strategy**:
 
 1. **Clone the repository**
    ```bash
-   git clone 
-   cd pokemonapp
+   git clone https://github.com/robert-muriithi/Pokedex.git
+   cd pokedex
    ```
 
 2. **Open in Android Studio**
@@ -329,10 +329,6 @@ The `PokemonRemoteMediator` implements an **offline-first strategy**:
 ./gradlew :core:data:connectedDebugAndroidTest
 ```
 
-### Test Coverage
-```bash
-./gradlew testDebugUnitTestCoverage
-```
 
 ## Key Features Implementation
 
@@ -382,18 +378,3 @@ This app uses the [PokeAPI](https://pokeapi.co/):
 - **Endpoints**:
   - `GET /pokemon?limit={limit}&offset={offset}` - List Pokemon
   - `GET /pokemon/{id or name}` - Get Pokemon details
-
-## App Icon
-
-The app features a custom **Pokeball-themed** adaptive icon:
-
-- **Design**: Classic Pokeball design with red top, white bottom, and black center band
-- **Foreground**: Central button with white border and black inner circle
-- **Format**: Vector drawable (scalable to any size)
-- **Compatibility**: Adaptive icon (Android 8.0+) with fallback WebP images for older versions
-
-The icon is instantly recognizable and represents the Pokemon theme perfectly, making it easy to find on your device.
-
-## Contributing
-
-
