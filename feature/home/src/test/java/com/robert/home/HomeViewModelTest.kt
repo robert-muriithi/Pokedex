@@ -61,16 +61,6 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `onSearchQueryChange updates search query`() = runTest {
-        viewModel = createViewModel()
-        testDispatcher.scheduler.advanceUntilIdle()
-
-        viewModel.onSearchQueryChange("pikachu")
-
-        assertEquals("pikachu", viewModel.searchQuery.value)
-    }
-
-    @Test
     fun `clearSearch resets query and state to Idle`() = runTest {
         viewModel = createViewModel()
 

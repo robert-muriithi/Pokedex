@@ -8,10 +8,7 @@
       <SelectionState runConfigName="PokemonDaoTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
-      <SelectionState runConfigName="StatBarHPPreview">
-        <option name="selectionMode" value="DROPDOWN" />
-      </SelectionState>
-      <SelectionState runConfigName="PokemonDetailContentTest">
+      <SelectionState runConfigName="PokemonCardTest">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>
