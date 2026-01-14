@@ -117,7 +117,6 @@ fun PokemonCard(
                         onSuccess = { result ->
                             val bitmap = (result.result.drawable as? BitmapDrawable)?.bitmap
                             if (bitmap != null) {
-//                                val color =
                                 dominantColor = extractDominantColor(bitmap = bitmap)
                             }
                         },
