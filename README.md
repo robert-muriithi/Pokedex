@@ -2,6 +2,11 @@
 
 A modern Android application built with Jetpack Compose that displays a list of Pokemon using the [PokeAPI](https://pokeapi.co/). The app features offline-first architecture with efficient pagination, search functionality, and beautiful UI with shared element transitions.
 
+
+# Screenshots
+<img src="ss/Screenshot_20260114_143132.png" width="250"/> <img src="ss/Screenshot_20260114_143141.png" width="250"/>
+
+
 ## Features
 
 - **Browse Pokemon**: Infinite scrolling list of all Pokemon with lazy loading
