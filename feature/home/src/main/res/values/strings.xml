@@ -5,4 +5,8 @@
     <string name="search_pok_mon_by_name_or_id">Search Pokémon by name or ID...</string>
     <string name="search">Search</string>
     <string name="clear">Clear</string>
+    <string name="no_pok_mon_found_matching">No Pokémon found matching \"%1$s\"</string>
+    <string name="error_no_internet">No internet connection</string>
+    <string name="error_timeout">Request timedout. Try again</string>
+    <string name="pok_mon_not_found">Pokémon \"%1$s\" not found</string>
 </resources>
