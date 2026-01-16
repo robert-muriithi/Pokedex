@@ -55,7 +55,7 @@ Clean Architecture provides several key benefits:
                          │ implemented by
 ┌────────────────────────┴────────────────────────────────────┐
 │                        Data Layer                           │
-│               (core:data, core:network modules)             │
+│         (core:data, core:network, core:database)            │
 │  • Repository Implementations                               │
 │  • Data Sources (Remote & Local)                            │
 │  • Data Mappers                                             │
@@ -82,15 +82,17 @@ Pokedex/
 │
 ├── core/
 │   ├── data/                    # Data layer
-│   │   ├── local/              # Room database
-│   │   │   ├── dao/            # Data Access Objects
-│   │   │   ├── entity/         # Database entities
-│   │   │   └── database/       # Database setup
 │   │   ├── paging/             # Paging 3 implementation
 │   │   │   └── PokemonRemoteMediator.kt
 │   │   ├── mapper/             # Data mappers (DTO ↔ Domain)
 │   │   ├── repository/         # Repository implementations
 │   │   └── di/                 # Dependency injection
+│   │
+│   ├── database/                # Database layer (Local storage)
+│   │   ├── dao/                # Data Access Objects
+│   │   ├── entity/             # Room database entities
+│   │   ├── database/           # Database setup
+│   │   └── di/                 # Database DI module
 │   │
 │   ├── domain/                  # Domain layer (Business logic)
 │   │   ├── model/              # Domain models
@@ -118,9 +120,9 @@ Pokedex/
 │   │   ├── HomeViewModel.kt
 │   │   └── components/         # Feature-specific components
 │   │
-│   └── detail/                  # Detail screen feature
-│       ├── DetailScreen.kt
-│       ├── DetailViewModel.kt
+│   └── details/                 # Details screen feature
+│       ├── DetailsScreen.kt
+│       ├── DetailsViewModel.kt
 │       └── components/         # Feature-specific components
 │
 └── gradle/
