@@ -5,9 +5,8 @@ import com.robert.domain.repository.PokemonRepository
 import com.robert.domain.model.Pokemon
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+
 class GetPokemonListUseCase @Inject constructor(
     private val repository: PokemonRepository
 ) {
