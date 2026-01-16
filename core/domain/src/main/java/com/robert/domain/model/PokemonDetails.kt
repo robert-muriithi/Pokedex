@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 import kotlinx.collections.immutable.ImmutableList
 
 @Immutable
-data class PokemonDetail(
+data class PokemonDetails(
     val id: Int,
     val name: String,
     val height: Int,
@@ -13,11 +13,11 @@ data class PokemonDetail(
     val imageUrl: String,
     val types: ImmutableList<String>,
     val abilities: ImmutableList<String>,
-    val stats: ImmutableList<PokemonStat>
+    val stats: ImmutableList<PokemonStats>
 )
 
 @Immutable
-data class PokemonStat(
+data class PokemonStats(
     val name: String,
     val baseStat: Int,
     val effort: Int

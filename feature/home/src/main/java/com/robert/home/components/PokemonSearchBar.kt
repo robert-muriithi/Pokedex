@@ -44,6 +44,7 @@ import com.robert.design_system.theme.PokemonTheme
 import com.robert.domain.model.Pokemon
 import com.robert.home.R
 import com.robert.home.SearchUiState
+import com.robert.home.UiText
 import java.util.Locale
 
 @Composable
@@ -143,6 +144,10 @@ private fun SearchResultContent(
             }
 
             is SearchUiState.Error -> {
+                val errorMessage = when (val text = searchState.message) {
+                    is UiText.StringResource -> stringResource(text.resId, *text.args.toTypedArray())
+                    is UiText.DynamicString -> text.value
+                }
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -150,7 +155,7 @@ private fun SearchResultContent(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = searchState.message,
+                        text = errorMessage,
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.error
                     )
@@ -271,8 +276,10 @@ private fun PokemonSearchBarSuccessPreview() {
                 onQueryChange = {},
                 searchState = SearchUiState.Success(
                     Pokemon(
+                        id = 1,
                         name = "bulbasaur",
-                        url = "https://pokeapi.co/api/v2/pokemon/1/"
+                        url = "",
+                        imageUrl = ""
                     )
                 ),
                 onPokemonClick = {},
@@ -290,7 +297,9 @@ private fun PokemonSearchBarErrorPreview() {
             PokemonSearchBar(
                 query = "unknown",
                 onQueryChange = {},
-                searchState = SearchUiState.Error("No Pokémon found matching \"unknown\""),
+                searchState = SearchUiState.Error(
+                    message = UiText.StringResource(R.string.pok_mon_not_found, listOf("unknown"))
+                ),
                 onPokemonClick = {},
                 onClearClick = {}
             )

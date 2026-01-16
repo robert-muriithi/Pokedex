@@ -2,7 +2,7 @@ package com.robert.network.dto
 
 import com.google.gson.annotations.SerializedName
 
-data class PokemonDetailResponse(
+data class PokemonDetailsResponse(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")

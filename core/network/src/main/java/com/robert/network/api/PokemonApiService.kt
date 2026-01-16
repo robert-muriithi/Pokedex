@@ -1,6 +1,6 @@
 package com.robert.network.api
 
-import com.robert.network.dto.PokemonDetailResponse
+import com.robert.network.dto.PokemonDetailsResponse
 import com.robert.network.dto.PokemonListResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -17,5 +17,5 @@ interface PokemonApiService {
     @GET("pokemon/{name}")
     suspend fun getPokemonDetail(
         @Path("name") name: String
-    ): PokemonDetailResponse
+    ): PokemonDetailsResponse
 }

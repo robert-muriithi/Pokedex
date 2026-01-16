@@ -27,13 +27,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.robert.detail.R
-import com.robert.domain.model.PokemonDetail
+import com.robert.domain.model.PokemonDetails
 import java.util.Locale
 
 @OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun PokemonDetailContent(
-    pokemonDetail: PokemonDetail,
+    pokemonDetails: PokemonDetails,
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope,
     modifier: Modifier = Modifier
@@ -59,13 +59,13 @@ fun PokemonDetailContent(
                 contentAlignment = Alignment.Center
             ) {
                 AsyncImage(
-                    model = pokemonDetail.imageUrl,
-                    contentDescription = pokemonDetail.name,
+                    model = pokemonDetails.imageUrl,
+                    contentDescription = pokemonDetails.name,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(32.dp)
                         .sharedElement(
-                            sharedContentState = rememberSharedContentState(key = "pokemon_image_${pokemonDetail.id}"),
+                            sharedContentState = rememberSharedContentState(key = "pokemon_image_${pokemonDetails.id}"),
                             animatedVisibilityScope = animatedVisibilityScope
                         ),
                     contentScale = ContentScale.Fit
@@ -78,14 +78,14 @@ fun PokemonDetailContent(
                     .padding(16.dp)
             ) {
                 Text(
-                    text = "#${pokemonDetail.id.toString().padStart(3, '0')}",
+                    text = "#${pokemonDetails.id.toString().padStart(3, '0')}",
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
 
                 Text(
-                    text = pokemonDetail.name.replaceFirstChar {
+                    text = pokemonDetails.name.replaceFirstChar {
                         if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString()
                     },
                     style = MaterialTheme.typography.headlineLarge,
@@ -103,7 +103,7 @@ fun PokemonDetailContent(
                 Row(
                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    pokemonDetail.types.forEach { type ->
+                    pokemonDetails.types.forEach { type ->
                         TypeChip(type = type)
                     }
                 }
@@ -116,15 +116,15 @@ fun PokemonDetailContent(
                 ) {
                     StatBox(
                         label = stringResource(R.string.height),
-                        value = "${pokemonDetail.height / 10f} m"
+                        value = "${pokemonDetails.height / 10f} m"
                     )
                     StatBox(
                         label = stringResource(R.string.weight),
-                        value = "${pokemonDetail.weight / 10f} kg"
+                        value = "${pokemonDetails.weight / 10f} kg"
                     )
                     StatBox(
                         label = stringResource(R.string.base_xp),
-                        value = pokemonDetail.baseExperience.toString()
+                        value = pokemonDetails.baseExperience.toString()
                     )
                 }
 
@@ -140,7 +140,7 @@ fun PokemonDetailContent(
                     horizontalArrangement = Arrangement.spacedBy(8.dp),
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    pokemonDetail.abilities.forEach { ability ->
+                    pokemonDetails.abilities.forEach { ability ->
                         AbilityChip(ability = ability)
                     }
                 }
@@ -154,7 +154,7 @@ fun PokemonDetailContent(
                 )
                 Spacer(modifier = Modifier.height(12.dp))
 
-                pokemonDetail.stats.forEach { stat ->
+                pokemonDetails.stats.forEach { stat ->
                     StatBar(
                         statName = stat.name,
                         statValue = stat.baseStat

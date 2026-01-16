@@ -13,7 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.robert.detail.DetailScreen
+import com.robert.detail.DetailsScreen
 import com.robert.home.HomeScreen
 import com.robert.navigation.Screen
 
@@ -47,7 +47,7 @@ fun PokemonNavHost() {
                     )
                 }
                 is Screen.Details -> {
-                    DetailScreen(
+                    DetailsScreen(
                         pokemon = screen.pokemon,
                         onBackClick = { currentScreen = Screen.Home },
                         sharedTransitionScope = this@SharedTransitionLayout,
