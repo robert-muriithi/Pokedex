@@ -1,7 +1,8 @@
-package com.robert.data.local.entity
+package com.robert.database.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+
 
 @Entity(tableName = "remote_keys")
 data class RemoteKeyEntity(
@@ -10,4 +11,3 @@ data class RemoteKeyEntity(
     val prevKey: Int?,
     val nextKey: Int?
 )
-

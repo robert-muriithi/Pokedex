@@ -1,15 +1,15 @@
 package com.robert.data.repository
 
 import com.google.common.truth.Truth.assertThat
-import com.robert.data.local.dao.PokemonDao
-import com.robert.data.local.database.PokemonDatabase
-import com.robert.data.local.entity.PokemonEntity
+import com.robert.database.PokemonDatabase
+import com.robert.database.dao.PokemonDao
+import com.robert.database.entity.PokemonEntity
 import com.robert.network.api.PokemonApiService
 import com.robert.network.dto.AbilityDto
 import com.robert.network.dto.AbilitySlotDto
 import com.robert.network.dto.OfficialArtworkDto
 import com.robert.network.dto.OtherSpritesDto
-import com.robert.network.dto.PokemonDetailResponse
+import com.robert.network.dto.PokemonDetailsResponse
 import com.robert.network.dto.SpritesDto
 import com.robert.network.dto.StatDto
 import com.robert.network.dto.StatNameDto
@@ -30,7 +30,7 @@ class PokemonRepositoryImplTest {
     private lateinit var pokemonDao: PokemonDao
     private lateinit var repository: PokemonRepositoryImpl
 
-    private val testPokemonDetailResponse = PokemonDetailResponse(
+    private val testPokemonDetailsResponse = PokemonDetailsResponse(
         id = 25,
         name = "pikachu",
         height = 4,
@@ -69,7 +69,7 @@ class PokemonRepositoryImplTest {
 
     @Test
     fun `getPokemonDetail returns success when API call succeeds`() = runTest {
-        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailResponse
+        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailsResponse
 
         val result = repository.getPokemonDetail("pikachu")
 
@@ -108,7 +108,7 @@ class PokemonRepositoryImplTest {
     @Test
     fun `searchPokemon calls API when not found in database`() = runTest {
         coEvery { pokemonDao.searchPokemon("pikachu") } returns null
-        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailResponse
+        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailsResponse
 
         val result = repository.searchPokemon("pikachu")
 
@@ -130,7 +130,7 @@ class PokemonRepositoryImplTest {
 
     @Test
     fun `getPokemonDetail maps types correctly`() = runTest {
-        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailResponse
+        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailsResponse
 
         val result = repository.getPokemonDetail("pikachu")
 
@@ -139,7 +139,7 @@ class PokemonRepositoryImplTest {
 
     @Test
     fun `getPokemonDetail maps abilities correctly`() = runTest {
-        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailResponse
+        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailsResponse
 
         val result = repository.getPokemonDetail("pikachu")
 
@@ -148,7 +148,7 @@ class PokemonRepositoryImplTest {
 
     @Test
     fun `getPokemonDetail uses official artwork when available`() = runTest {
-        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailResponse
+        coEvery { apiService.getPokemonDetail("pikachu") } returns testPokemonDetailsResponse
 
         val result = repository.getPokemonDetail("pikachu")
 

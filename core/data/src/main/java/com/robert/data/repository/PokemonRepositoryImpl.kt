@@ -5,13 +5,14 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.robert.data.local.database.PokemonDatabase
 import com.robert.data.mapper.toDomain
 import com.robert.data.paging.PokemonRemoteMediator
+import com.robert.database.PokemonDatabase
 import com.robert.domain.model.Pokemon
-import com.robert.domain.model.PokemonDetail
+import com.robert.domain.model.PokemonDetails
 import com.robert.domain.repository.PokemonRepository
 import com.robert.network.api.PokemonApiService
+import com.robert.network.util.NetworkConstants
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import timber.log.Timber
@@ -43,7 +44,7 @@ class PokemonRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getPokemonDetail(name: String): Result<PokemonDetail> {
+    override suspend fun getPokemonDetail(name: String): Result<PokemonDetails> {
         return try {
             val response = apiService.getPokemonDetail(name)
             Timber.d("Successfully fetched Pokemon detail: ${response.name}")
@@ -66,8 +67,10 @@ class PokemonRepositoryImpl @Inject constructor(
             Timber.d("Found Pokemon from API: ${response.name}")
             Result.success(
                 Pokemon(
+                    id = response.id,
                     name = response.name,
-                    url = "https://pokeapi.co/api/v2/pokemon/${response.id}/"
+                    url = "${NetworkConstants.POKEMON_API_BASE_URL}pokemon/${response.id}/",
+                    imageUrl = "${NetworkConstants.POKEMON_IMAGE_BASE_URL}${response.id}.png"
                 )
             )
         } catch (e: Exception) {

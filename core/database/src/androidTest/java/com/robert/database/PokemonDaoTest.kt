@@ -1,18 +1,18 @@
-package com.robert.data.local
+package com.robert.database
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.google.common.truth.Truth.assertThat
-import com.robert.data.local.dao.PokemonDao
-import com.robert.data.local.database.PokemonDatabase
-import com.robert.data.local.entity.PokemonEntity
+import com.robert.database.dao.PokemonDao
+import com.robert.database.entity.PokemonEntity
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+
 
 @RunWith(AndroidJUnit4::class)
 class PokemonDaoTest {
@@ -126,4 +126,3 @@ class PokemonDaoTest {
         assertThat(result?.page).isEqualTo(1)
     }
 }
-

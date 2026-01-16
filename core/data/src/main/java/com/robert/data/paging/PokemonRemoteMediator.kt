@@ -5,9 +5,9 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
-import com.robert.data.local.database.PokemonDatabase
-import com.robert.data.local.entity.PokemonEntity
-import com.robert.data.local.entity.RemoteKeyEntity
+import com.robert.database.PokemonDatabase
+import com.robert.database.entity.PokemonEntity
+import com.robert.database.entity.RemoteKeyEntity
 import com.robert.network.api.PokemonApiService
 import timber.log.Timber
 import java.io.IOException
