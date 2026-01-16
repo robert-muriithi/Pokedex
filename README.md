@@ -37,29 +37,29 @@ Clean Architecture provides several key benefits:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                      Presentation Layer                      │
-│                    (app, feature modules)                    │
+│                      Presentation Layer                     │
+│                    (app, feature modules)                   │
 │  • UI Components (Jetpack Compose)                          │
-│  • ViewModels                                                │
-│  • UI State Management                                       │
+│  • ViewModels                                               │
+│  • UI State Management                                      │
 └────────────────────────┬────────────────────────────────────┘
                          │ depends on
 ┌────────────────────────▼────────────────────────────────────┐
-│                       Domain Layer                           │
-│                    (core:domain module)                      │
-│  • Business Logic                                            │
-│  • Use Cases                                                 │
-│  • Domain Models                                             │
-│  • Repository Interfaces (contracts)                         │
+│                       Domain Layer                          │
+│                    (core:domain module)                     │
+│  • Business Logic                                           │
+│  • Use Cases                                                │
+│  • Domain Models                                            │
+│  • Repository Interfaces (contracts)                        │
 └────────────────────────▲────────────────────────────────────┘
                          │ implemented by
 ┌────────────────────────┴────────────────────────────────────┐
-│                        Data Layer                            │
-│               (core:data, core:network modules)              │
-│  • Repository Implementations                                │
-│  • Data Sources (Remote & Local)                             │
-│  • Data Mappers                                              │
-│  • Caching Strategy                                          │
+│                        Data Layer                           │
+│               (core:data, core:network modules)             │
+│  • Repository Implementations                               │
+│  • Data Sources (Remote & Local)                            │
+│  • Data Mappers                                             │
+│  • Caching Strategy                                         │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -371,7 +371,7 @@ The app prioritizes local data:
 
 - **MVVM** (Model-View-ViewModel) - Separation of UI and business logic
 - **Repository Pattern** - Abstraction of data sources
-- **Use Case Pattern** - Encapsulation of business logic
+- **Use Case Interactor Pattern** - Encapsulation of business logic
 - **Dependency Injection** - Loose coupling and testability
 - **Observer Pattern** - Reactive UI updates with Flow
 - **Mapper Pattern** - Data transformation between layers
