@@ -83,7 +83,7 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:design-system"))
     implementation(project(":feature:home"))
-    implementation(project(":feature:detail"))
+    implementation(project(":feature:details"))
     implementation(project(":core:navigation"))
 
 
