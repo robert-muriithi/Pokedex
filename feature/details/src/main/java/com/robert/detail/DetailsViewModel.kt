@@ -11,22 +11,22 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(
+class DetailsViewModel @Inject constructor(
     private val getPokemonDetailUseCase: GetPokemonDetailUseCase
 ) : ViewModel() {
     
-    private val _uiState = MutableStateFlow<DetailUiState>(DetailUiState.Loading)
-    val uiState: StateFlow<DetailUiState> = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow<DetailsUiState>(DetailsUiState.Loading)
+    val uiState: StateFlow<DetailsUiState> = _uiState.asStateFlow()
     
     fun loadPokemonDetail(name: String) {
         viewModelScope.launch {
-            _uiState.value = DetailUiState.Loading
+            _uiState.value = DetailsUiState.Loading
             getPokemonDetailUseCase(name)
                 .onSuccess { detail ->
-                    _uiState.value = DetailUiState.Success(detail)
+                    _uiState.value = DetailsUiState.Success(detail)
                 }
                 .onFailure { error ->
-                    _uiState.value = DetailUiState.Error(error.message ?: "Unknown error")
+                    _uiState.value = DetailsUiState.Error(error.message ?: "Unknown error")
                 }
         }
     }

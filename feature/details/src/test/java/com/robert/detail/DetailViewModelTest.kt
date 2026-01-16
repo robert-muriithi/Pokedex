@@ -1,8 +1,8 @@
 package com.robert.detail
 
 import app.cash.turbine.test
-import com.robert.domain.model.PokemonDetail
-import com.robert.domain.model.PokemonStat
+import com.robert.domain.model.PokemonDetails
+import com.robert.domain.model.PokemonStats
 import com.robert.domain.usecase.GetPokemonDetailUseCase
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -24,9 +24,9 @@ class DetailViewModelTest {
 
     private val testDispatcher = StandardTestDispatcher()
     private lateinit var getPokemonDetailUseCase: GetPokemonDetailUseCase
-    private lateinit var viewModel: DetailViewModel
+    private lateinit var viewModel: DetailsViewModel
 
-    private val testPokemonDetail = PokemonDetail(
+    private val testPokemonDetails = PokemonDetails(
         id = 25,
         name = "pikachu",
         height = 4,
@@ -36,9 +36,9 @@ class DetailViewModelTest {
         types = persistentListOf("Electric"),
         abilities = persistentListOf("Static", "Lightning Rod"),
         stats = persistentListOf(
-            PokemonStat("hp", 35, 0),
-            PokemonStat("attack", 55, 0),
-            PokemonStat("defense", 40, 0)
+            PokemonStats("hp", 35, 0),
+            PokemonStats("attack", 55, 0),
+            PokemonStats("defense", 40, 0)
         )
     )
 
@@ -55,22 +55,22 @@ class DetailViewModelTest {
 
     @Test
     fun `initial state is Loading`() = runTest {
-        viewModel = DetailViewModel(getPokemonDetailUseCase)
+        viewModel = DetailsViewModel(getPokemonDetailUseCase)
 
-        assertEquals(DetailUiState.Loading, viewModel.uiState.value)
+        assertEquals(DetailsUiState.Loading, viewModel.uiState.value)
     }
 
     @Test
     fun `loadPokemonDetail success updates state to Success`() = runTest {
-        coEvery { getPokemonDetailUseCase("pikachu") } returns Result.success(testPokemonDetail)
+        coEvery { getPokemonDetailUseCase("pikachu") } returns Result.success(testPokemonDetails)
 
-        viewModel = DetailViewModel(getPokemonDetailUseCase)
+        viewModel = DetailsViewModel(getPokemonDetailUseCase)
         viewModel.loadPokemonDetail("pikachu")
         testDispatcher.scheduler.advanceUntilIdle()
 
         val state = viewModel.uiState.value
-        assertTrue(state is DetailUiState.Success)
-        assertEquals(testPokemonDetail, (state as DetailUiState.Success).pokemonDetail)
+        assertTrue(state is DetailsUiState.Success)
+        assertEquals(testPokemonDetails, (state as DetailsUiState.Success).pokemonDetails)
     }
 
     @Test
@@ -78,43 +78,43 @@ class DetailViewModelTest {
         val errorMessage = "Network error"
         coEvery { getPokemonDetailUseCase("unknown") } returns Result.failure(Exception(errorMessage))
 
-        viewModel = DetailViewModel(getPokemonDetailUseCase)
+        viewModel = DetailsViewModel(getPokemonDetailUseCase)
         viewModel.loadPokemonDetail("unknown")
         testDispatcher.scheduler.advanceUntilIdle()
 
         val state = viewModel.uiState.value
-        assertTrue(state is DetailUiState.Error)
-        assertEquals(errorMessage, (state as DetailUiState.Error).message)
+        assertTrue(state is DetailsUiState.Error)
+        assertEquals(errorMessage, (state as DetailsUiState.Error).message)
     }
 
     @Test
     fun `loadPokemonDetail with null error message shows Unknown error`() = runTest {
         coEvery { getPokemonDetailUseCase("unknown") } returns Result.failure(Exception())
 
-        viewModel = DetailViewModel(getPokemonDetailUseCase)
+        viewModel = DetailsViewModel(getPokemonDetailUseCase)
         viewModel.loadPokemonDetail("unknown")
         testDispatcher.scheduler.advanceUntilIdle()
 
         val state = viewModel.uiState.value
-        assertTrue(state is DetailUiState.Error)
-        assertEquals("Unknown error", (state as DetailUiState.Error).message)
+        assertTrue(state is DetailsUiState.Error)
+        assertEquals("Unknown error", (state as DetailsUiState.Error).message)
     }
 
     @Test
     fun `loadPokemonDetail emits Loading then Success`() = runTest {
-        coEvery { getPokemonDetailUseCase("pikachu") } returns Result.success(testPokemonDetail)
+        coEvery { getPokemonDetailUseCase("pikachu") } returns Result.success(testPokemonDetails)
         
-        viewModel = DetailViewModel(getPokemonDetailUseCase)
+        viewModel = DetailsViewModel(getPokemonDetailUseCase)
         
         viewModel.uiState.test {
-            assertEquals(DetailUiState.Loading, awaitItem())
+            assertEquals(DetailsUiState.Loading, awaitItem())
             
             viewModel.loadPokemonDetail("pikachu")
             testDispatcher.scheduler.advanceUntilIdle()
             
 
             val successState = awaitItem()
-            assertTrue(successState is DetailUiState.Success)
+            assertTrue(successState is DetailsUiState.Success)
             
             cancelAndIgnoreRemainingEvents()
         }
