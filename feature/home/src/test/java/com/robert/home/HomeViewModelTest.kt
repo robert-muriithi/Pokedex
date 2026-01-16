@@ -83,8 +83,10 @@ class HomeViewModelTest {
     @Test
     fun `search success returns Success state with pokemon`() = runTest {
         val pokemon = Pokemon(
+            id = 25,
             name = "pikachu",
-            url = "https://pokeapi.co/api/v2/pokemon/25/"
+            url = "https://pokeapi.co/api/v2/pokemon/25/",
+            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
         )
         coEvery { searchPokemonUseCase("pikachu") } returns Result.success(pokemon)
 
@@ -114,7 +116,9 @@ class HomeViewModelTest {
 
         val state = viewModel.searchState.value
         assertTrue(state is SearchUiState.Error)
-        assertTrue((state as SearchUiState.Error).message.contains("No Pokémon found"))
+        val message = (state as SearchUiState.Error).message
+        assertTrue(message is UiText.StringResource)
+        assertEquals(R.string.no_pok_mon_found_matching, (message as UiText.StringResource).resId)
     }
 
     @Test
@@ -131,15 +135,19 @@ class HomeViewModelTest {
 
         val state = viewModel.searchState.value
         assertTrue(state is SearchUiState.Error)
-        assertEquals("No internet connection", (state as SearchUiState.Error).message)
+        val message = (state as SearchUiState.Error).message
+        assertTrue(message is UiText.StringResource)
+        assertEquals(R.string.error_no_internet, (message as UiText.StringResource).resId)
     }
 
 
     @Test
     fun `search shows Loading state while fetching`() = runTest {
         val pokemon = Pokemon(
+            id = 25,
             name = "pikachu",
-            url = "https://pokeapi.co/api/v2/pokemon/25/"
+            url = "https://pokeapi.co/api/v2/pokemon/25/",
+            imageUrl = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png"
         )
         coEvery { searchPokemonUseCase("pikachu") } returns Result.success(pokemon)
 

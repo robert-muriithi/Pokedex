@@ -153,8 +153,10 @@ private fun PokemonCardPikachuPreview() {
             AnimatedVisibility(visible = true) {
                 PokemonCard(
                     pokemon = Pokemon(
+                        id = 25,
                         name = "pikachu",
-                        url = "https://pokeapi.co/api/v2/pokemon/25/"
+                        url = "",
+                        imageUrl = ""
                     ),
                     onClick = {},
                     sharedTransitionScope = this@SharedTransitionLayout,
@@ -175,8 +177,10 @@ private fun PokemonCardBulbasaurPreview() {
             AnimatedVisibility(visible = true) {
                 PokemonCard(
                     pokemon = Pokemon(
+                        id = 1,
                         name = "bulbasaur",
-                        url = "https://pokeapi.co/api/v2/pokemon/1/"
+                        url = "",
+                        imageUrl = ""
                     ),
                     onClick = {},
                     sharedTransitionScope = this@SharedTransitionLayout,
@@ -200,14 +204,14 @@ private fun PokemonCardGridPreview() {
                     horizontalArrangement = Arrangement.spacedBy(12.dp)
                 ) {
                     PokemonCard(
-                        pokemon = Pokemon("charmander", "https://pokeapi.co/api/v2/pokemon/4/"),
+                        pokemon = Pokemon(4, "charmander", "", ""),
                         onClick = {},
                         sharedTransitionScope = this@SharedTransitionLayout,
                         animatedVisibilityScope = this@AnimatedVisibility,
                         modifier = Modifier.weight(1f)
                     )
                     PokemonCard(
-                        pokemon = Pokemon("squirtle", "https://pokeapi.co/api/v2/pokemon/7/"),
+                        pokemon = Pokemon(7, "squirtle", "", ""),
                         onClick = {},
                         sharedTransitionScope = this@SharedTransitionLayout,
                         animatedVisibilityScope = this@AnimatedVisibility,

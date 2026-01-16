@@ -22,7 +22,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.robert.design_system.theme.PokemonTheme
 import com.robert.domain.model.Pokemon
+import com.robert.home.R
 import com.robert.home.SearchUiState
+import com.robert.home.UiText
 import com.robert.home.components.PokemonSearchBar
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
@@ -115,8 +117,10 @@ fun HomeScreenWithSearchPreview() {
                     onQueryChange = { },
                     searchState = SearchUiState.Success(
                         Pokemon(
+                            id = 25,
                             name = "pikachu",
-                            url = "https://pokeapi.co/api/v2/pokemon/25/"
+                            url = "",
+                            imageUrl = ""
                         )
                     ),
                     onPokemonClick = { },
@@ -157,7 +161,9 @@ fun HomeScreenSearchErrorPreview() {
                 PokemonSearchBar(
                     query = "unknownpokemon",
                     onQueryChange = { },
-                    searchState = SearchUiState.Error("No Pokémon found matching \"unknownpokemon\""),
+                    searchState = SearchUiState.Error(
+                        UiText.StringResource(R.string.pok_mon_not_found)
+                    ),
                     onPokemonClick = { },
                     onClearClick = { }
                 )

@@ -39,7 +39,7 @@ class HomeViewModel @Inject constructor(
 
     init {
         _searchQuery
-            .debounce(500)
+            .debounce(DEBOUNCE_DELAY_MS)
             .distinctUntilChanged()
             .filter { it.isNotBlank() }
             .onEach { query -> performSearch(query) }
@@ -49,7 +49,7 @@ class HomeViewModel @Inject constructor(
     fun onSearchQueryChange(query: String) {
         _searchQuery.value = query
         if (query.isBlank()) {
-            _searchState.value = SearchUiState.Idle
+            clearSearch()
         }
     }
 
@@ -67,14 +67,25 @@ class HomeViewModel @Inject constructor(
                 }
                 .onFailure { error ->
                     val message = when {
-                        error.message?.contains("404") == true -> "No Pokémon found matching \"$query\""
-                        error.message?.contains("Unable to resolve host") == true -> "No internet connection"
-                        error.message?.contains("timeout") == true -> "Request timed out. Please try again"
-                        else -> "Pokémon \"$query\" not found"
+                        error.message?.contains("404") == true -> UiText.StringResource(
+                            R.string.no_pok_mon_found_matching,
+                            listOf(query)
+                        )
+
+                        error.message?.contains("Unable to resolve host") == true -> UiText.StringResource(
+                            R.string.error_no_internet
+                        )
+
+                        error.message?.contains("timeout") == true -> UiText.StringResource(R.string.error_timeout)
+                        else -> UiText.StringResource(R.string.pok_mon_not_found, listOf(query))
                     }
                     _searchState.value = SearchUiState.Error(message)
                 }
         }
+    }
+
+    companion object {
+        const val DEBOUNCE_DELAY_MS = 500L
     }
 }
 

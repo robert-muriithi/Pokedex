@@ -17,6 +17,11 @@ sealed interface SearchUiState {
     data class Success(val pokemon: Pokemon) : SearchUiState
 
     @Immutable
-    data class Error(val message: String) : SearchUiState
+    data class Error(val message: UiText) : SearchUiState
+}
+
+sealed class UiText {
+    data class StringResource(val resId: Int, val args: List<Any> = emptyList()) : UiText()
+    data class DynamicString(val value: String) : UiText()
 }
 
