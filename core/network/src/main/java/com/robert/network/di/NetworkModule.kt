@@ -1,5 +1,6 @@
 package com.robert.network.di
 
+import com.robert.network.BuildConfig
 import com.robert.network.api.PokemonApiService
 import dagger.Module
 import dagger.Provides
@@ -16,7 +17,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val BASE_URL = "https://pokeapi.co/api/v2/"
 
     @Provides
     @Singleton
@@ -43,7 +43,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(BuildConfig.POKEMON_API_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

@@ -8,8 +8,17 @@ plugins {
 
 android {
     namespace = "com.robert.network"
-    compileSdk {
-        version = release(36)
+    compileSdk = 36
+
+    buildTypes {
+        release {
+            buildConfigField("String", "POKEMON_API_URL", "\"https://pokeapi.co/api/v2/\"")
+            buildConfigField("String", "POKEMON_IMAGE_URL", "\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\"")
+        }
+        debug {
+            buildConfigField("String", "POKEMON_API_URL", "\"https://pokeapi.co/api/v2/\"")
+            buildConfigField("String", "POKEMON_IMAGE_URL", "\"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/\"")
+        }
     }
 
     compileOptions {
@@ -18,6 +27,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
